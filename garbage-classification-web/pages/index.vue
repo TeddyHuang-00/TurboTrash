@@ -1,5 +1,5 @@
 <template>
-  <UContainer class="max-w-md mx-auto h-full">
+  <UContainer class="w-full max-w-md mx-auto h-full">
     <h1 class="text-4xl font-bold w-fit mx-auto">⚡ Turbo Trash</h1>
 
     <UDivider class="py-6" />
@@ -20,13 +20,7 @@
             :options="cameraOptions"
             option-attribute="label"
           />
-          <video
-            ref="video"
-            muted
-            controls
-            autoplay
-            class="h-fit w-full rounded-lg mt-4"
-          />
+          <video ref="video" autoplay class="h-fit w-full rounded-lg mt-4" />
         </div>
         <USkeleton class="h-60 w-full" v-else />
 
