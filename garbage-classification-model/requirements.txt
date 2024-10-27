@@ -1,0 +1,6 @@
+jupyterlab
+scikit-learn
+seaborn
+tqdm
+torch
+torchvision
