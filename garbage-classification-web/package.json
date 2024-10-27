@@ -19,7 +19,6 @@
     "vue-router": "latest"
   },
   "devDependencies": {
-    "@formkit/auto-animate": "^0.8.2",
     "@morev/vue-transitions": "^3.0.2",
     "@vueuse/core": "^11.1.0",
     "@vueuse/nuxt": "^11.1.0",
