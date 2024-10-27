@@ -1,3 +1,4 @@
 /target
 /ckpt
-/pytorch-ckpt
+/pytorch-ckpt/**/best_model.pth
+/pytorch-ckpt/**/summary.txt
