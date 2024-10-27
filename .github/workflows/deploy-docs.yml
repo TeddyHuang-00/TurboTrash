@@ -1,0 +1,74 @@
+name: Deploy Docs to GitHub Pages
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  actions: read
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      NUXT_APP_BASE_URL: /TurboTrash/
+      FRONT_END_BASE_DIR: garbage-classification-web
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Rust Caching
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: "./${{ env.FRONT_END_BASE_DIR }}/classification-model -> pkg"
+
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install Dependencies
+        run: |
+          cd ${{ env.FRONT_END_BASE_DIR }}
+          bun install --frozen-lockfile
+
+      - name: Build Webapp
+        env:
+          NODE_OPTIONS: --max_old_space_size=8192
+        run: |
+          cd ${{ env.FRONT_END_BASE_DIR }}
+          bun wasm
+          bun generate
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "./${{ env.FRONT_END_BASE_DIR }}/dist"
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

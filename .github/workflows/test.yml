@@ -1,0 +1,43 @@
+name: Test compiling and building
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      NUXT_APP_BASE_URL: /TurboTrash/
+      FRONT_END_BASE_DIR: garbage-classification-web
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Rust Caching
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: "./${{ env.FRONT_END_BASE_DIR }}/classification-model -> pkg"
+
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install Dependencies
+        run: |
+          cd ${{ env.FRONT_END_BASE_DIR }}
+          bun install --frozen-lockfile
+
+      - name: Build Webapp
+        env:
+          NODE_OPTIONS: --max_old_space_size=8192
+        run: |
+          cd ${{ env.FRONT_END_BASE_DIR }}
+          bun wasm
+          bun generate
