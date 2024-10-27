@@ -1,5 +1,5 @@
 <template>
-  <UContainer class="max-w-md mx-auto h-full overflow-y-scroll">
+  <UContainer class="max-w-md mx-auto h-full">
     <h1 class="text-4xl font-bold w-fit mx-auto">⚡ Turbo Trash</h1>
 
     <UDivider class="py-6" />
