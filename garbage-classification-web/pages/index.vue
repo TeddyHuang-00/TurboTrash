@@ -1,5 +1,5 @@
 <template>
-  <UContainer class="w-full max-w-md mx-auto h-full">
+  <UContainer class="w-full max-w-md mx-auto h-fit pb-6">
     <h1 class="text-4xl font-bold w-fit mx-auto">⚡ Turbo Trash</h1>
 
     <UDivider class="py-6" />
