@@ -109,6 +109,8 @@ const labels = [
 ];
 const threshold = 1 / labels.length;
 
+const pause = ref(false);
+
 // For location
 const { coords } = useGeolocation();
 const latitude = computed(() =>
@@ -138,14 +140,18 @@ const cameraOptions = computed(() => {
   }));
 });
 const { stream, restart } = useUserMedia({
-  constraints: { video: { deviceId: videoDevice } },
+  constraints: { video: { deviceId: videoDevice }, audio: false },
   enabled: true,
   autoSwitch: true,
 });
 watchEffect(() => {
   if (video.value) video.value.srcObject = stream.value!;
 });
-watch(videoDevice, () => restart);
+watch(videoDevice, () => {
+  pause.value = true;
+  restart();
+  pause.value = false;
+});
 
 const canvas = ref<HTMLCanvasElement>();
 const ctx = ref<CanvasRenderingContext2D>();
@@ -191,6 +197,7 @@ onMounted(async () => {
   finalized.value = true;
 
   const update = async () => {
+    if (pause.value) return;
     const vw = stream.value?.getVideoTracks()[0].getSettings().width;
     const vh = stream.value?.getVideoTracks()[0].getSettings().height;
     if (!vw || !vh || !canvas.value || !video.value || !ctx.value) return;
