@@ -1,0 +1,32 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "wasm": "bash ./build-wasm.sh",
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nuxt/ui": "^2.18.7",
+    "@nuxtjs/tailwindcss": "^6.12.2",
+    "nuxt": "3.13.1",
+    "nuxt-maplibre": "^1.0.0",
+    "vue": "latest",
+    "vue-router": "latest"
+  },
+  "devDependencies": {
+    "@formkit/auto-animate": "^0.8.2",
+    "@morev/vue-transitions": "^3.0.2",
+    "@vueuse/core": "^11.1.0",
+    "@vueuse/nuxt": "^11.1.0",
+    "unwasm": "^0.3.9",
+    "vite-plugin-wasm-pack": "^0.1.12"
+  },
+  "trustedDependencies": [
+    "@morev/vue-transitions"
+  ]
+}
