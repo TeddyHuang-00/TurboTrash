@@ -4,4 +4,4 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-burn = { version = "0.15.0", default-features = false, features = ["ndarray"] }
+burn = { version = "0.16.0", default-features = false, features = ["ndarray"] }
