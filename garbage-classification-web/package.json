@@ -23,7 +23,7 @@
     "@morev/vue-transitions": "^3.0.2",
     "@vueuse/core": "^14.0.0",
     "@vueuse/nuxt": "^14.0.0",
-    "unwasm": "^0.4.0",
+    "unwasm": "^0.5.0",
     "vite-plugin-wasm-pack": "^0.1.12"
   },
   "trustedDependencies": [
