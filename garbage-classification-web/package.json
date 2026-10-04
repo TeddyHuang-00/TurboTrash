@@ -20,7 +20,7 @@
     "vue-router": "latest"
   },
   "devDependencies": {
-    "@morev/vue-transitions": "^3.0.2",
+    "@morev/vue-transitions": "^4.0.0",
     "@vueuse/core": "^15.0.0",
     "@vueuse/nuxt": "^15.0.0",
     "unwasm": "^0.6.0",
